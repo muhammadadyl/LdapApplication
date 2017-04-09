@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.WebApi", "LdapApplication.WebApi\LdapApplication.WebApi.csproj", "{D7725724-9C85-4DF2-B66E-EE19927B60D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.Services", "LdapApplication.Services\LdapApplication.Services.csproj", "{1EB414DB-5A70-4724-B499-7FD06D0C611E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.Model", "LdapApplication.Model\LdapApplication.Model.csproj", "{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D7725724-9C85-4DF2-B66E-EE19927B60D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7725724-9C85-4DF2-B66E-EE19927B60D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7725724-9C85-4DF2-B66E-EE19927B60D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EB414DB-5A70-4724-B499-7FD06D0C611E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EB414DB-5A70-4724-B499-7FD06D0C611E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EB414DB-5A70-4724-B499-7FD06D0C611E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EB414DB-5A70-4724-B499-7FD06D0C611E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
