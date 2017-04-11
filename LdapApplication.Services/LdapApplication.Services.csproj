@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LdapApplication.Model\LdapApplication.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LdapApplication.Model">
+      <HintPath>..\LdapApplication.Model\bin\Debug\netstandard1.6\LdapApplication.Model.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
