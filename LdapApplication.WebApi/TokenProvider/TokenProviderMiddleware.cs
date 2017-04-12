@@ -1,7 +1,4 @@
-﻿// Copyright (c) Nate Barbettini. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using System;
+﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -10,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
-namespace SimpleTokenProvider
+namespace LdapApplication
 {
     /// <summary>
     /// Token generator middleware component which is added to an HTTP pipeline.
@@ -100,7 +97,8 @@ namespace SimpleTokenProvider
             var response = new
             {
                 access_token = encodedJwt,
-                expires_in = (int)_options.Expiration.TotalSeconds
+                expires_in = (int)_options.Expiration.TotalSeconds,
+                username = identity.Name
             };
 
             // Serialize and return the response

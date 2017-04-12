@@ -1,10 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LdapApplication.Model
 {
     public class AppUser
     {
-        public string DisplayName { get; set; }
+        [Key]
         public string Username { get; set; }
+        public string DisplayName { get; set; }
+        public string Mail { get; set; }
     }
 }

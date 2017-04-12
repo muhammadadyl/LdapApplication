@@ -6,8 +6,9 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
+using LdapApplication.Services.Interfaces;
 
-namespace SimpleTokenProvider
+namespace LdapApplication
 {
     /// <summary>
     /// Provides options for <see cref="TokenProviderMiddleware"/>.

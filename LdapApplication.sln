@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.Model", "LdapApplication.Model\LdapApplication.Model.csproj", "{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplication.Repository", "LdapApplication.Repository\LdapApplication.Repository.csproj", "{D8B72717-E02C-4369-B66D-E936735FF136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LdapApplicaiton.Data", "LdapApplicaiton.Data\LdapApplicaiton.Data.csproj", "{50F65076-4C52-4B2F-8528-87A8305370D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E4128F-C2AD-4EF6-8382-7A01ACE24DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B72717-E02C-4369-B66D-E936735FF136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B72717-E02C-4369-B66D-E936735FF136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B72717-E02C-4369-B66D-E936735FF136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B72717-E02C-4369-B66D-E936735FF136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F65076-4C52-4B2F-8528-87A8305370D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F65076-4C52-4B2F-8528-87A8305370D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F65076-4C52-4B2F-8528-87A8305370D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F65076-4C52-4B2F-8528-87A8305370D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

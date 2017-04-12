@@ -13,7 +13,7 @@ using LdapApplication.Services;
 
 namespace LdapApplication.WebApi
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IHostingEnvironment env)
         {
@@ -41,6 +41,8 @@ namespace LdapApplication.WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            ConfigureAuth(app);
 
             app.UseMvc();
         }

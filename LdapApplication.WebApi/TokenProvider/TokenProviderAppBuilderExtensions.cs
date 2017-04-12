@@ -4,8 +4,9 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Options;
+using LdapApplication.Services.Interfaces;
 
-namespace SimpleTokenProvider
+namespace LdapApplication
 {
     /// <summary>
     /// Adds a token generation endpoint to an application pipeline.
