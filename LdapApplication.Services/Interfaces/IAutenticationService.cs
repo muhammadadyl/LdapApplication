@@ -7,6 +7,6 @@ namespace LdapApplication.Services.Interfaces
 {
     public interface IAuthenticationService
     {
-        AppUser Login(string username, string password);
+        UserLoginInfo Login(string username, string password);
     }
 }

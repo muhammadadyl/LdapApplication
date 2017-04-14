@@ -7,6 +7,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using LdapApplication.Services.Interfaces;
+using LdapApplication.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace LdapApplication
 {
@@ -20,6 +22,9 @@ namespace LdapApplication
         /// </summary>
         /// <remarks>The default path is <c>/token</c>.</remarks>
         public string Path { get; set; } = "/token";
+
+        public PathString LogoutPath { get; set; } = "/logout";
+
 
         /// <summary>
         ///  The Issuer (iss) claim for generated tokens.
@@ -45,7 +50,7 @@ namespace LdapApplication
         /// <summary>
         /// Resolves a user identity given a username and password.
         /// </summary>
-        public Func<string, string, Task<ClaimsIdentity>> IdentityResolver { get; set; }
+        public Func<HttpContext, string, string, Task<UserLoginInfo>> IdentityResolver { get; set; }
 
         /// <summary>
         /// Generates a random value (nonce) for each generated token.
@@ -53,5 +58,7 @@ namespace LdapApplication
         /// <remarks>The default nonce is a random GUID.</remarks>
         public Func<Task<string>> NonceGenerator { get; set; }
             = new Func<Task<string>>(() => Task.FromResult(Guid.NewGuid().ToString()));
+
+        public Action<HttpContext, UserLoginInfo> SaveLoginInfo { get; set; }
     }
 }

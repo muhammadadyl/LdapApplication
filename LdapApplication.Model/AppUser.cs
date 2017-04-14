@@ -1,9 +1,10 @@
-﻿using System;
+﻿using LdapApplication.Model.Common;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace LdapApplication.Model
 {
-    public class AppUser
+    public class AppUser : BaseEntity
     {
         [Key]
         public string Username { get; set; }

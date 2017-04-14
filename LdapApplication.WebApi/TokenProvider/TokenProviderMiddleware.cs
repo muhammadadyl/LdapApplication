@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using LdapApplication.Model;
+using LdapApplication.Services.Common;
+using LdapApplication.Repository.Common;
+using LdapApplicaiton.Data;
 
 namespace LdapApplication
 {
@@ -46,6 +50,11 @@ namespace LdapApplication
             {
                 return _next(context);
             }
+            //TODO: Logout
+            if (!context.Request.Path.Equals(_options.LogoutPath, StringComparison.Ordinal))
+            {
+                return _next(context);
+            }
 
             // Request must be POST with Content-Type: application/x-www-form-urlencoded
             if (!context.Request.Method.Equals("POST")
@@ -65,14 +74,14 @@ namespace LdapApplication
             var username = context.Request.Form["username"];
             var password = context.Request.Form["password"];
 
-            var identity = await _options.IdentityResolver(username, password);
+
+            var identity = await _options.IdentityResolver(context, username, password);
             if (identity == null)
             {
                 context.Response.StatusCode = 400;
                 await context.Response.WriteAsync("Invalid username or password.");
                 return;
             }
-
             var now = DateTime.UtcNow;
 
             // Specifically add the jti (nonce), iat (issued timestamp), and sub (subject/user) claims.
@@ -94,12 +103,20 @@ namespace LdapApplication
                 signingCredentials: _options.SigningCredentials);
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
+            if (string.IsNullOrEmpty(identity.Token))
+            {
+                identity.Token = encodedJwt;
+                identity.ExpiryDate = jwt.ValidTo;
+                _options.SaveLoginInfo(context, identity);
+            }
+
             var response = new
             {
                 access_token = encodedJwt,
                 expires_in = (int)_options.Expiration.TotalSeconds,
-                username = identity.Name
+                username = identity.DisplayName
             };
+
 
             // Serialize and return the response
             context.Response.ContentType = "application/json";
@@ -142,6 +159,7 @@ namespace LdapApplication
             {
                 throw new ArgumentNullException(nameof(TokenProviderOptions.NonceGenerator));
             }
+
         }
 
         /// <summary>

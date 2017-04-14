@@ -8,5 +8,6 @@ namespace LdapApplication.Model
     {
         public string Token { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime ExpiryDate { get; set; }
     }
 }

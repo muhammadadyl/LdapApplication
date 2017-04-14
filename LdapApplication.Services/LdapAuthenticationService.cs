@@ -25,7 +25,7 @@ namespace LdapApplication.Services
             };
         }
 
-        public AppUser Login(string username, string password)
+        public UserLoginInfo Login(string username, string password)
         {
             _connection.Connect(_config.Url, _config?.Port == 0 ? LdapConnection.DEFAULT_SSL_PORT : _config.Port);
             _connection.Bind(_config.BindDn, _config.BindCredentials);
@@ -47,7 +47,7 @@ namespace LdapApplication.Services
                     _connection.Bind(user.DN, password);
                     if (_connection.Bound)
                     {
-                        return new AppUser
+                        return new UserLoginInfo
                         {
                             DisplayName = user.getAttribute(DisplayNameAttribute).StringValue,
                             Username = user.getAttribute(Uid).StringValue,

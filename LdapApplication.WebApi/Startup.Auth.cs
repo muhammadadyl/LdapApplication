@@ -1,8 +1,10 @@
 ﻿using LdapApplication.Model;
 using LdapApplication.Services;
+using LdapApplication.Services.Common;
 using LdapApplication.Services.Interfaces;
 using LdapApplication.Services.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -29,7 +31,8 @@ namespace LdapApplication.WebApi
                 Audience = "ssouser",
                 Issuer = "ssoidentityapp",
                 SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
-                IdentityResolver = GetIdentity
+                IdentityResolver = GetIdentity,
+                SaveLoginInfo = SaveLoginInfo
             });
 
             var tokenValidationParameters = new TokenValidationParameters
@@ -58,7 +61,7 @@ namespace LdapApplication.WebApi
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters,
-                
+
             });
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -74,24 +77,19 @@ namespace LdapApplication.WebApi
 
         }
 
-        private Task<ClaimsIdentity> GetIdentity(string username, string password)
+        private Task<UserLoginInfo> GetIdentity(HttpContext context, string username, string password)
         {
+            IUserLoginInfoService userloginService = (IUserLoginInfoService)context.RequestServices.GetService(typeof(IUserLoginInfoService));
+            UserLoginInfo user = userloginService.GetUserInfoByUsername(username);
 
-            IAuthenticationService _authentication = new LdapAuthenticationService(
-                Options.Create<LdapConfig>(
-                new LdapConfig {
-                    Url = Configuration["ldap:url"],
-                    Port = int.Parse(Configuration["ldap:port"] ?? "0"),
-                    BindDn = Configuration["ldap:bindDn"],
-                    BindCredentials = Configuration["ldap:bindCredentials"],
-                    SearchBase = Configuration["ldap:searchBase"],
-                    SearchFilter = Configuration["ldap:searchFilter"]
-                }
-            ));
+            IAuthenticationService _authentication = (IAuthenticationService)context.RequestServices.GetService(typeof(IAuthenticationService));
 
-            AppUser user = _authentication.Login(username, password);
-            if(user != null)
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(user.Username, "Token"), new Claim[] { }));
+            if (user != null)
+                return Task.FromResult(user);
+
+            user = _authentication.Login(username, password);
+            if (user != null)
+                return Task.FromResult(user);
 
             #region Test Stub Code
 
@@ -103,7 +101,21 @@ namespace LdapApplication.WebApi
             #endregion
 
             // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
+            return Task.FromResult<UserLoginInfo>(null);
+        }
+
+        private void SaveLoginInfo(HttpContext context, UserLoginInfo obj)
+        {
+            try
+            {
+                IService<UserLoginInfo> userloginService = (IService<UserLoginInfo>)context.RequestServices.GetService(typeof(IService<UserLoginInfo>));
+                userloginService.Add(obj);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

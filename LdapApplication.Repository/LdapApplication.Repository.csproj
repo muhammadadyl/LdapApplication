@@ -4,4 +4,13 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LdapApplicaiton.Data\LdapApplicaiton.Data.csproj" />
+    <ProjectReference Include="..\LdapApplication.Model\LdapApplication.Model.csproj" />
+  </ItemGroup>
+
 </Project>

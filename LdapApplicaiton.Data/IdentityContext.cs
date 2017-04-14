@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LdapApplication.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace LdapApplicaiton.Data

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LdapApplication.Model\LdapApplication.Model.csproj" />
+    <ProjectReference Include="..\LdapApplication.Repository\LdapApplication.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -7,9 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using LdapApplication.Services.Models;
 using LdapApplication.Services.Interfaces;
 using LdapApplication.Services;
+using LdapApplicaiton.Data;
+using LdapApplication.Services.Common;
+using LdapApplication.Model;
+using LdapApplication.Repository.Common;
+using LdapApplication.Repository;
 
 namespace LdapApplication.WebApi
 {
@@ -30,8 +36,14 @@ namespace LdapApplication.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IdentityContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.Configure<LdapConfig>(Configuration.GetSection("ldap"));
             services.AddScoped<IAuthenticationService, LdapAuthenticationService>();
+            services.AddScoped<IRepository<UserLoginInfo>, UserLoginInfoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserLoginInfoService, UserLoginInfoService>();
             // Add framework services.
             services.AddMvc();
         }
