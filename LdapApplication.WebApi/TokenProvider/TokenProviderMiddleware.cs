@@ -6,10 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using LdapApplication.Model;
-using LdapApplication.Services.Common;
-using LdapApplication.Repository.Common;
-using LdapApplicaiton.Data;
 
 namespace LdapApplication
 {
